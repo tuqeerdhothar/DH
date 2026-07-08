@@ -1,16 +1,136 @@
-melbourne-cabs/
-│
-├── index.php
-├── booking.php
-├── dispatcher.php
-├── drivers.php
-├── login.php
-├── admin.php
-├── config.php
-├── database.sql
-├── api/
-├── assets/
-│   ├── css/
-│   ├── js/
-│   └── images/
-└── uploads/
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melbourne Cabs Booking</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f2f2f2;
+    margin:0;
+    padding:20px;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+h2{
+    text-align:center;
+    color:#ff9800;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    margin-bottom:15px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#28a745;
+    color:white;
+    font-size:16px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#218838;
+}
+
+#result{
+    margin-top:20px;
+    background:#e8f5e9;
+    padding:15px;
+    border-radius:5px;
+    display:none;
+    white-space:pre-line;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>🚖 Melbourne Cabs Booking</h2>
+
+<form id="bookingForm">
+
+<label>Name</label>
+<input type="text" id="name" required>
+
+<label>Phone</label>
+<input type="tel" id="phone" required>
+
+<label>Pickup Address</label>
+<input type="text" id="pickup" required>
+
+<label>Destination</label>
+<input type="text" id="destination" required>
+
+<label>Pickup Time</label>
+<input type="datetime-local" id="time" required>
+
+<label>Vehicle Type</label>
+<select id="vehicle">
+<option>Sedan</option>
+<option>SUV</option>
+<option>Maxi Taxi</option>
+<option>Silver Service</option>
+</select>
+
+<label>Notes</label>
+<textarea id="notes"></textarea>
+
+<button type="submit">Book Taxi</button>
+
+</form>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+document.getElementById("bookingForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let booking="MC"+Math.floor(Math.random()*9000+1000);
+
+let msg=
+"BOOKING ID: "+booking+
+"\n\nName: "+document.getElementById("name").value+
+"\nPhone: "+document.getElementById("phone").value+
+"\nPickup: "+document.getElementById("pickup").value+
+"\nDestination: "+document.getElementById("destination").value+
+"\nTime: "+document.getElementById("time").value+
+"\nVehicle: "+document.getElementById("vehicle").value+
+"\nNotes: "+document.getElementById("notes").value+
+"\n\nStatus: Waiting Dispatch";
+
+let result=document.getElementById("result");
+result.style.display="block";
+result.innerHTML="<b>Booking Submitted</b><br><br>"+msg;
+
+});
+
+</script>
+
+</body>
+</html>
