@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Imran Khan Taxi Services</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+body{
+    background:#f4f4f4;
+}
+.container{
+    max-width:500px;
+    margin:20px auto;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    overflow:hidden;
+}
+.header{
+    background:#111;
+    color:#fff;
+    text-align:center;
+    padding:20px;
+}
+.header h1{
+    font-size:28px;
+}
+.header p{
+    color:#ddd;
+    margin-top:5px;
+}
+.form{
+    padding:20px;
+}
+label{
+    display:block;
+    margin-top:12px;
+    font-weight:bold;
+}
+input,select,textarea{
+    width:100%;
+    padding:12px;
+    margin-top:5px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+textarea{
+    height:80px;
+    resize:none;
+}
+button{
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    cursor:pointer;
+}
+.dispatch{
+    background:#25D366;
+    color:white;
+}
+.clear{
+    background:#333;
+    color:white;
+}
+.footer{
+    text-align:center;
+    padding:15px;
+    color:#666;
+    font-size:14px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>🚖 Imran Khan Taxi Services</h1>
+<p>Taxi Dispatch Booking Form</p>
+</div>
+
+<div class="form">
+
+<label>Booking Number</label>
+<input type="text" id="booking" readonly>
+
+<label>Passenger Name</label>
+<input type="text" id="name">
+
+<label>Phone Number</label>
+<input type="tel" id="phone">
+
+<label>Pickup Address</label>
+<input type="text" id="pickup">
+
+<label>Destination</label>
+<input type="text" id="drop">
+
+<label>Pickup Time</label>
+<input type="datetime-local" id="time">
+
+<label>Passengers</label>
+<select id="passengers">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+<option>6+</option>
+</select>
+
+<label>Vehicle</label>
+<select id="vehicle">
+<option>Sedan</option>
+<option>Wagon</option>
+<option>SUV</option>
+<option>MAXI</option>
+<option>Luxury</option>
+</select>
+
+<label>Payment</label>
+<select id="payment">
+<option>Cash</option>
+<option>Card</option>
+<option>Cabcharge</option>
+<option>MPTP</option>
+<option>Account</option>
+</select>
+
+<label>Fare</label>
+<input type="text" id="fare" placeholder="Meter or Fixed Price">
+
+<label>Notes</label>
+<textarea id="notes"></textarea>
+
+<button class="dispatch" onclick="dispatch()">📲 Dispatch to WhatsApp</button>
+
+<button class="clear" onclick="clearForm()">Clear Form</button>
+
+</div>
+
+<div class="footer">
+©️ Imran Khan Taxi Services
+</div>
+
+</div>
+
+<script>
+
+let bookingNo=localStorage.getItem("bookingNo");
+
+if(!bookingNo){
+bookingNo=1001;
+}
+
+document.getElementById("booking").value=bookingNo;
+
+function dispatch(){
+
+let booking=document.getElementById("booking").value;
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let pickup=document.getElementById("pickup").value;
+let drop=document.getElementById("drop").value;
+let time=document.getElementById("time").value;
+let passengers=document.getElementById("passengers").value;
+let vehicle=document.getElementById("vehicle").value;
+let payment=document.getElementById("payment").value;
+let fare=document.getElementById("fare").value;
+let notes=document.getElementById("notes").value;
+
+let message=
+`🚖 *NEW TAXI BOOKING*
+
+Booking #: ${booking}
+
+👤 Passenger
+${name}
+
+📞 Phone
+${phone}
+
+📍 Pickup
+${pickup}
+
+🏁 Destination
+${drop}
+
+🕒 Pickup Time
+${time}
+
+👥 Passengers
+${passengers}
+
+🚗 Vehicle
+${vehicle}
+
+💳 Payment
+${payment}
+
+💲 Fare
+${fare}
+
+📝 Notes
+${notes}
+
+Reply with:
+
+✅ TAKEN`;
+
+window.open("https://wa.me/?text="+encodeURIComponent(message));
+
+bookingNo++;
+
+localStorage.setItem("bookingNo",bookingNo);
+
+document.getElementById("booking").value=bookingNo;
+
+}
+
+function clearForm(){
+
+document.getElementById("name").value="";
+document.getElementById("phone").value="";
+document.getElementById("pickup").value="";
+document.getElementById("drop").value="";
+document.getElementById("time").value="";
+document.getElementById("fare").value="";
+document.getElementById("notes").value="";
+
+}
+
+</script>
+
+</body>
+</html>
